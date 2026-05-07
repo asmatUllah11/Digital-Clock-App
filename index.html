@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 60px 80px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        min-width: 400px;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      #clock {
+        font-size: 72px;
+        font-weight: 700;
+        color: #667eea;
+        font-family: "Courier New", monospace;
+        letter-spacing: 4px;
+        display: block;
+        padding: 20px;
+        border-radius: 15px;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1),
+          rgba(118, 75, 162, 0.1)
+        );
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+        50% {
+          text-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 30px;
+          min-width: auto;
+          width: 90%;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        #clock {
+          font-size: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Digital Clock</h1>
+      <p id="clock"></p>
+    </div>
+  </body>
+  <script>
+    // Create a real-time digital clock that updates every second using DOM.
+    function updateClock() {
+      let current = new Date();
+
+      let hours = current.getHours();
+      let minutes = current.getMinutes();
+      let seconds = current.getSeconds();
+
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      let time = hours + ":" + minutes + ":" + seconds;
+      let p = document.getElementById("clock");
+      p.innerText = time;
+
+      setTimeout(updateClock, 1000);
+    }
+    updateClock();
+  </script>
+</html>
